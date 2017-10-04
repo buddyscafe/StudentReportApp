@@ -1,0 +1,32 @@
+<Student>
+    <Id>001</Id>
+    <name>Anand Jain</name>
+    <className>12th</className>
+    <subjects>
+        <subject>
+            <name>English</name>
+            <marks>70</marks>
+            <totalMarks>100</totalMarks>
+        </subject>
+        <Subject>
+            <name>Hindi</name>
+            <marks>80</marks>
+            <totalMarks>100</totalMarks>
+        </Subject>
+        <Subject>
+            <name>Physics</name>
+            <marks>75</marks>
+            <totalMarks>100</totalMarks>
+        </Subject>
+        <Subject>
+            <name>Chemistry</name>
+            <marks>70</marks>
+            <totalMarks>100</totalMarks>
+        </Subject>
+        <Subject>
+            <name>Mathematics</name>
+            <marks>95</marks>
+            <totalMarks>100</totalMarks>
+        </Subject>
+    </subjects>
+</Student>
