@@ -4,13 +4,15 @@ import com.studentreport.data.PersistenceManager;
 import com.studentreport.data.StudentRepository;
 import com.studentreport.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-public class StudentManager implements PersistenceManager<Student>{
+@Component
+public class StudentManager implements PersistenceManager<Student> {
 
     @Autowired
-    StudentRepository studentRepository;
+    public StudentRepository studentRepository;
 
     @Override
     public List<Student> getRecords() {

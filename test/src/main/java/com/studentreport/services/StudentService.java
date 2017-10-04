@@ -1,28 +1,31 @@
 package com.studentreport.services;
 
-import com.studentreport.data.PersistenceManager;
 import com.studentreport.data.StudentFileRepo;
-import com.studentreport.data.StudentRepository;
 import com.studentreport.data.impl.StudentManager;
 import com.studentreport.model.Student;
 import com.studentreport.model.StudentReport;
 import com.studentreport.processor.ResultProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@EnableMongoRepositories(basePackages="com.studentreport.data")
+@Service
 public class StudentService {
 
     private static final int POOL_SIZE_FOR_RECORD_PROCESSOR = 5;
 
     @Autowired
-    StudentManager studentManager;
+    private StudentManager studentManager;
 
     public void removeAll() throws Exception{
         studentManager.removeAll();
     }
+
 
     public void createStudent(Student student) throws  Exception{
         studentManager.createRecord(student);
@@ -38,7 +41,6 @@ public class StudentService {
     }
 
     public void createAllStudentsReport(String pathname) {
-
         List<Student> studentList = studentManager.getRecords();
         if(studentList.isEmpty()) {
             return;

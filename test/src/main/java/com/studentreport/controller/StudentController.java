@@ -4,6 +4,7 @@ import com.studentreport.model.Student;
 import com.studentreport.model.StudentReport;
 import com.studentreport.services.StudentService;
 import com.studentreport.util.APIConstants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -13,17 +14,20 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
 
+    @Autowired
+    StudentService service;
+
     @RequestMapping(method = RequestMethod.POST)
     public String uploadStudents(@RequestBody List<Student> studentList){
         System.out.println(studentList);
         if(!studentList.isEmpty()) {
-            final StudentService service = new StudentService();
             try {
                 service.removeAll();
                 System.out.println("DEBUG : "+"Existing students record removed");
                 for (Student student : studentList) {
                     service.createStudent(student);
                 }
+                System.out.println("DEBUG : "+"New students record uploaded successfully");
                 return APIConstants.UPLOAD_SUCCESSFUL;
             } catch (Exception e) {
                 System.out.println("ERROR : "+"Student records insertion failed");
@@ -36,7 +40,6 @@ public class StudentController {
 
     @RequestMapping(method = RequestMethod.GET, value="")
     public List<Student> getAllStudents(){
-        final StudentService service = new StudentService();
         try {
             return service.getAllStudentRecords();
         } catch (Exception e) {
@@ -48,7 +51,6 @@ public class StudentController {
 
     @RequestMapping(method = RequestMethod.GET, value="/report/")
     public List<StudentReport> getAllStudentsReport(){
-        final StudentService service = new StudentService();
         try {
             return service.getAllStudentsReport();
         } catch (Exception e) {
@@ -60,7 +62,6 @@ public class StudentController {
 
     @RequestMapping(method = RequestMethod.POST, value="/report/")
     public String createStudentsReport(@RequestBody String pathname){
-        final StudentService service = new StudentService();
         try {
             service.createAllStudentsReport(pathname);
             return APIConstants.CREATE_SUCCESSFUL;
